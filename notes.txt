@@ -1,0 +1,12 @@
+Installation:
+
+rvm install 2.7.4
+rvm use 2.7.4
+npm install --global yarn (I already had node/npm installed)
+gem install rails (handled by gemfile now)
+rails new ~/Development/turnip --webpack=vue (Initializing project only)
+yarn add "@babel/plugin-proposal-private-methods" (Still necessary???)
+yarn add vue-loader@15.9.7
+yarn add vue-template-compiler@2.6.1
+gem install foreman
+rails webpacker:install:erb
