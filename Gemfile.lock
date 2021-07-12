@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/whitemage12380/settlement_generator
+  revision: d0acb2dbb105cac69e581020226ac8ad0fcd49bd
+  tag: 0.3.1
+  specs:
+    settlement_generator (0.3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -87,6 +94,7 @@ GEM
       warden (~> 1.2.3)
     erubi (1.10.0)
     ffi (1.15.3)
+    fileutils (1.4.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.10)
@@ -219,6 +227,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  fileutils
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg
@@ -227,6 +236,7 @@ DEPENDENCIES
   rails (~> 6.1.4)
   sass-rails (>= 6)
   selenium-webdriver
+  settlement_generator!
   spring
   turbolinks (~> 5)
   tzinfo-data

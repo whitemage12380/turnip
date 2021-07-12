@@ -10,3 +10,4 @@ yarn add vue-loader@15.9.7
 yarn add vue-template-compiler@2.6.1
 gem install foreman
 rails webpacker:install:erb
+yarn install axios vue-axios

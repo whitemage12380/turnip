@@ -59,3 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pg'
 # Use Devise for authentication
 gem 'devise'
+# Use FileUtils to handle file-based user content
+gem 'fileutils'
+# Settlements gem from github
+gem 'settlement_generator', git: 'https://github.com/whitemage12380/settlement_generator', tag: '0.3.1'

@@ -74,5 +74,10 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
+  # Set for devise (have not confirmed it is fully correct and appropriate)
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Custom: Base directory for user content files (e.g. settlement files)
+  #         From this directory, new directories are created named after users
+  config.x.turnip.base_content_directory = Rails.root.join('data')
 end
