@@ -1,29 +1,20 @@
-// import Vue from 'vue'
+import Vue from 'vue';
 
-// Vue.component("settlements", Settlements)
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+Vue.use(Vuetify)
 
-
-import Vue from 'vue/dist/vue.esm.js';
 import Axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, Axios)
 
-import Settlements from '../settlements.vue'
+import Settlements from '../components/settlements/settlements.vue'
 Vue.component("settlements", Settlements)
-
-// Vue.component('settlements', {
-//   data: function () {
-//     return {
-//       message: 'WTF'
-//     }
-//   },
-//   template: '<div>{{message}}</div>'
-// })
 
 document.addEventListener('turbolinks:load', () => {
   const element = document.getElementById('app');
   if (element != null) {
-    const app = new Vue({}).$mount(element);
+    const app = new Vue({vuetify: new Vuetify()}).$mount(element);
     console.log("Loaded Vue (settlements)", app);
   }
 });

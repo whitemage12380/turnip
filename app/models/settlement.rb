@@ -24,6 +24,10 @@ class Settlement
     end
   end
 
+  def to_h()
+    @settlement_obj.to_h
+  end
+
   def self.all_for_user(user)
     dir = self.settlements_directory(user)
     return [] unless  Dir.exist?(dir)
