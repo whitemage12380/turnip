@@ -1,14 +1,15 @@
 <template>
-  <div id="app">
+  <div id="settlements">
     <p>{{ message }}</p>
   </div>
 </template>
 
 <script>
 export default {
+  name: "Settlements",
   data: function () {
     return {
-      message: "Hello Settlements!"
+      message: "Hello Settlements! (vue)"
     }
   }
 }
