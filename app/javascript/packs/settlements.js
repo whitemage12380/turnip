@@ -9,7 +9,9 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, Axios)
 
 import Settlements from '../components/settlements/settlements.vue'
+import Settlement from '../components/settlements/settlement.vue'
 Vue.component("settlements", Settlements)
+Vue.component("settlement", Settlement)
 
 document.addEventListener('turbolinks:load', () => {
   const element = document.getElementById('app');

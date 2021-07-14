@@ -1,10 +1,25 @@
 <template>
-  <v-app>
-    <div id="settlements">
+  <div id="settlements">
+    <v-app>
+      <v-app-bar app absolute>
+        <v-app-bar-title class="headline text-uppercase text-no-wrap">
+          Settlements
+        </v-app-bar-title>
+      </v-app-bar>
+      <v-main>
+        <v-container fluid>
+          <v-expansion-panels>
+            <settlement v-for="settlement in settlements" :key="settlement.name" v-bind:settlement="settlement"></settlement>
+          </v-expansion-panels>
+        </v-container>
+      </v-main>
+    </v-app>
+    <div id="outsidevuetify"
       <p>{{ message }}</p>
       <p>{{ num_settlements() }}</p>
     </div>
-  </v-app>
+  </div>
+
 </template>
 
 <script>
