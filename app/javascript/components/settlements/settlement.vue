@@ -1,10 +1,16 @@
 <template>
   <v-expansion-panel>
-    <v-expansion-header>
-      {{ settlement }}
-    </v-expansion-header>
+    <v-expansion-panel-header>
+      {{ settlement.name }}
+    </v-expansion-panel-header>
+    <v-expansion-panel-content>
+      <v-container>
+        <v-row>
+          <settlement-attribute v-bind:settlement_attribute="settlement.tables['Basic Information'][0]"></settlement-attribute>
+        </v-row>
+      </v-container>
+    </v-expansion-panel-content>
   </v-expansion-panel>
-  
 </template>
 
 <script>
@@ -19,9 +25,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<!-- <style scoped>
 p {
   font-size: 2em;
   text-align: center;
 }
-</style>
+</style> -->
