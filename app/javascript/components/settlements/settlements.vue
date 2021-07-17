@@ -14,10 +14,6 @@
         </v-container>
       </v-main>
     </v-app>
-    <div id="outsidevuetify"
-      <p>{{ message }}</p>
-      <p>{{ num_settlements() }}</p>
-    </div>
   </div>
 
 </template>
@@ -27,7 +23,6 @@ export default {
   props: ["initial_settlements"],
   data: function () {
     return {
-      message: "Hello Settlements! (vue)",
       settlements: this.initial_settlements
     }
   },
@@ -43,5 +38,8 @@ export default {
 p {
   font-size: 2em;
   text-align: center;
+}
+.v-app-bar-title__content {
+  text-overflow: clip;
 }
 </style>
