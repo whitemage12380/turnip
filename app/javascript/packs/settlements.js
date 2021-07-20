@@ -5,9 +5,9 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import Vuetify from 'vuetify'
 Vue.use(Vuetify)
 
-import Axios from 'axios'
-import VueAxios from 'vue-axios'
-Vue.use(VueAxios, Axios)
+// import Axios from 'axios'
+// import VueAxios from 'vue-axios'
+// Vue.use(VueAxios, Axios)
 
 import Settlements from '../components/settlements/settlements.vue'
 import Settlement from '../components/settlements/settlement.vue'

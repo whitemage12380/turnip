@@ -7,10 +7,11 @@
       <div v-if="settlement_location.hasOwnProperty('owners')">
       <h4>Owners</h4>
         <v-expansion-panels >
-          <v-expansion-panel v-for="owner in settlement_location.owners">
+          <v-expansion-panel v-for="(owner, index) in settlement_location.owners" :key="index">
             <v-expansion-panel-header><b>{{ owner.full_name }}</b> ({{ ownerRaceStr(owner) }})</v-expansion-panel-header>
             <v-expansion-panel-content>
-              <p v-if="ownerDescriptionFamily(owner) !== 'undefined'">{{ ownerDescriptionFamily(owner) }}</p>
+              <p v-if="typeof ownerDescriptionName(owner) !== 'undefined'">{{ ownerDescriptionName(owner) }}</p>
+              <p v-if="typeof ownerDescriptionFamily(owner) !== 'undefined'">{{ ownerDescriptionFamily(owner) }}</p>
             </v-expansion-panel-content>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -72,7 +73,22 @@ export default {
       return "description here"
     },
     ownerDescriptionName: function (owner) {
-
+      let includeDescription = false
+      let nameRace = ""
+      let nameCategory = ""
+      if (owner.name_race != owner.race || owner.name_ethnicity != owner.ethnicity || owner.race != owner.family_race) {
+        nameRace = " " + this.ownerNameRaceStr(owner)
+        includeDescription = true
+      }
+      if (typeof owner.category !== 'undefined' && owner.category != 'any') {
+        nameCategory = " " + owner.category
+        includeDescription = true
+      }
+      if (includeDescription) {
+        return `Name origin:${nameRace}${nameCategory}`
+      } else {
+        return undefined
+      }
     },
     ownerDescriptionFamily: function (owner) {
       if (owner.race != owner.family_race) {

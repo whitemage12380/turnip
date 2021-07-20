@@ -9,6 +9,10 @@ var string_helpers = {
 		      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 		    }
 		  )
+		},
+		toSnakeCase(str) {
+			return str.replace(/([a-z ])([A-Z])/g, "$1 $2" )
+				.replace(/ +/g, "_").toLowerCase()
 		}
 	}
 }
