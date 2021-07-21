@@ -13,7 +13,7 @@
           </v-btn>
           <v-container fluid>
             <v-expansion-panels>
-              <settlement v-for="settlement in sortedSettlements" :key="settlement.name" :settlement="settlement"></settlement>
+              <settlement v-for="settlement in sortedSettlements" :key="settlement.name" :settlement="settlement" v-on:delete-settlement="deleteSettlement"></settlement>
             </v-expansion-panels>
           </v-container>
         </div>
@@ -24,7 +24,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
+import string_helpers from '../../packs/mixins.js'
 export default {
   props: ["initial_settlements"],
   data: function () {
@@ -68,6 +69,18 @@ export default {
           alert("failure")
         })
     },
+    deleteSettlement: function (settlementName) {
+      console.log("got here!")
+      let that = this
+      axios.delete(`/settlements/${this.toSnakeCase(settlementName)}.json`, {}, {'headers': {'Accept': 'application/json'}})
+        .then(function(response) {
+          that.settlements = that.settlements.filter(function(s) {
+            return s.name != settlementName
+          })
+        }).catch(function(error) {
+          alert("failure")
+        })
+    },
     refresh: function () {
       let that = this
       axios.get('/settlements.json', {}, {'headers': {'Accept': 'application/json'}, 'responseType': 'json'})
@@ -78,7 +91,10 @@ export default {
           alert("failure")
         })
     }
-  }
+  },
+  mixins: [
+    string_helpers
+  ]
 }
 </script>
 

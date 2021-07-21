@@ -37,6 +37,10 @@ class Settlement
     return false
   end
 
+  def destroy(user)
+    FileUtils.rm @settlement_obj.full_filepath
+  end
+
   def save()
     @settlement_obj.save()
   end

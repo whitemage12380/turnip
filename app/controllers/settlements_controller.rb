@@ -42,6 +42,16 @@ class SettlementsController < ApplicationController
     end
   end
 
+  # DELETE /settlements/<name>
+  # DELETE /settlements/<name>.json
+  def destroy
+    @settlement = Settlement.find(current_user, params[:id])
+    @settlement.destroy(current_user)
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
   private
     def settlement_params
       params.require(:settlement).permit(:name)

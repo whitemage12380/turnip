@@ -7,9 +7,9 @@
         </div>
         <div class="float-right">
           <v-fade-transition leave-absolute>
-            <v-dialog v-if="open" v-model="dialog" max-width="500">
+            <v-dialog v-if="open" v-model="dialogRename" max-width="500">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn v-bind="attrs" v-on="on" small class="float-right">Rename</v-btn>
+                <v-btn v-bind="attrs" v-on="on" small class="settlement-button">Rename</v-btn>
               </template>
               <v-card>
                 <v-row no-gutters class="align-center">
@@ -18,6 +18,23 @@
                   </v-col>
                   <v-col class="px-2 flex-grow-0">
                     <v-btn @click="renameSettlement">Rename</v-btn>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-dialog>
+          </v-fade-transition>
+          <v-fade-transition leave-absolute>
+            <v-dialog v-if="open" v-model="dialogDelete" max-width="500">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn v-bind="attrs" v-on="on" small class="settlement-button">Delete</v-btn>
+              </template>
+              <v-card>
+                <v-row no-gutters class="align-center">
+                  <v-col class="pa-2">
+                    Really delete settlement "{{ settlement.name }}?"
+                  </v-col>
+                  <v-col class="pa-2 flex-grow-0">
+                    <v-btn @click="deleteSettlement">Delete</v-btn>
                   </v-col>
                 </v-row>
               </v-card>
@@ -44,7 +61,7 @@
               <h3>{{ toTitleCase(category) }}</h3>
               <v-container>
                 <v-row>
-                  <v-col v-for="(location, index) in locations" :key="index" class="location_col">
+                  <v-col v-for="(location, index) in locations" :key="index" class="location-col">
                     <settlement-location :settlement_location="location" :location_type="category"></settlement-location>
                   </v-col>
                 </v-row>
@@ -87,7 +104,8 @@ export default {
   data: function () {
     return {
       tab: null,
-      dialog: false,
+      dialogRename: false,
+      dialogDelete: false,
       newName: this.settlement.name
     }
   },
@@ -117,12 +135,16 @@ export default {
         return
       }
       let that = this
-      axios.patch(`/settlement/${this.toSnakeCase(this.settlement.name)}.json`, {'settlement': {'name': this.newName}}, {'headers': {'Accept': 'application/json'}, 'responseType': 'json'})
+      axios.patch(`/settlements/${this.toSnakeCase(this.settlement.name)}.json`, {'settlement': {'name': this.newName}}, {'headers': {'Accept': 'application/json'}, 'responseType': 'json'})
         .then(function(response) {
           that.settlement.name = response.data.name
         }).catch(function(error) {
           alert("failure")
         })
+    },
+    deleteSettlement: function () {
+      this.dialogDelete = false
+      this.$emit('delete-settlement', this.settlement.name)
     }
   },
   mixins: [
@@ -132,7 +154,11 @@ export default {
 </script>
 
 <style scoped>
-.location_col {
+.location-col {
   flex: 1 0 50%;
+}
+.settlement-button {
+  float: right;
+  margin:  0 4px;
 }
 </style>

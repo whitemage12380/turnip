@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   get '/settlements', to: 'settlements#index'
   post '/settlements', to: 'settlements#create'
 
-  patch '/settlement/:id', to: 'settlements#update'
+  patch '/settlements/:id', to: 'settlements#update'
+  delete '/settlements/:id', to: 'settlements#destroy'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
