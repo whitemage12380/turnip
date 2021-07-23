@@ -21,7 +21,7 @@ Vue.component("settlement-location", SettlementLocation)
 document.addEventListener('turbolinks:load', () => {
   const element = document.getElementById('app');
   if (element != null) {
-    const app = new Vue({vuetify: new Vuetify()}).$mount(element);
+    const app = new Vue({vuetify: new Vuetify({icons: {iconfont: 'mdiSvg'}})}).$mount(element);
     console.log("Loaded Vue (settlements)", app);
   }
 });
