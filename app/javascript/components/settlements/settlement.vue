@@ -90,7 +90,8 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
+import download from 'downloadjs'
 import string_helpers from '../../packs/mixins.js'
 export default {
   props: {
@@ -141,7 +142,13 @@ export default {
         })
     },
     saveAsMd: function () {
-
+      let that = this
+      axios.get(`/settlements/markdown/${this.toSnakeCase(this.settlement.name)}.json`, {}, {'headers': {'Accept': 'application/json'}, 'responseType': 'json'})
+        .then(function(response) {
+          download(response.data, `${that.toSnakeCase(that.settlement.name)}.md`, "text/markdown")
+        }).catch(function(error) {
+          alert("failure")
+        })
     },
     deleteSettlement: function () {
       this.dialogDelete = false

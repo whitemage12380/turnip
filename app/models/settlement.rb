@@ -49,6 +49,10 @@ class Settlement
     @settlement_obj.to_h
   end
 
+  def to_markdown()
+    @settlement_obj.to_markdown
+  end
+
   def self.all_for_user(user)
     dir = self.settlements_directory(user)
     return [] unless  Dir.exist?(dir)

@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/whitemage12380/settlement_generator
-  revision: e3e57acd5cc7586fcfadcf262f6f11a8b68b1bcd
-  tag: 0.5.1
+  revision: 5d3fa3c8e23316301de112ccb65c2f4030be9007
+  tag: 0.6.0
   specs:
-    settlement_generator (0.5.1)
+    settlement_generator (0.6.0)
 
 GEM
   remote: https://rubygems.org/

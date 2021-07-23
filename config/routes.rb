@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   patch '/settlements/:id', to: 'settlements#update'
   delete '/settlements/:id', to: 'settlements#destroy'
 
+  get '/settlements/markdown/:id', to: 'settlements#markdown'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

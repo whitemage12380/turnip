@@ -12,6 +12,14 @@ class SettlementsController < ApplicationController
     end
   end
 
+  # GET /settlements/markdown/1.json
+  def markdown
+    @settlement = Settlement.find(current_user, params[:id])
+    respond_to do |format|
+      format.json { render json: @settlement.to_markdown }
+    end
+  end
+
   # POST /settlements.json
   def create
     logger.info "user:"
