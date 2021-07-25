@@ -1,13 +1,13 @@
 <template>
   <v-card @click="toggleExpanded()">
-    <v-card-title>{{ locationTitle(settlement_location, location_type) }}</v-card-title>
-    <v-card-subtitle v-if="locationNeedsSubtitle(settlement_location)">{{ locationSubtitle(settlement_location) }}</v-card-subtitle>
-    <div v-show="expanded" class="expanded_content px-4 pb-4" @click.stop.prevent>
-      <p>{{ settlement_location["description"] }}</p>
-      <div v-if="settlement_location.hasOwnProperty('owners')">
+    <v-card-title>{{ locationTitle(settlementLocation, locationType) }}</v-card-title>
+    <v-card-subtitle v-if="locationNeedsSubtitle(settlementLocation)">{{ locationSubtitle(settlementLocation) }}</v-card-subtitle>
+    <div v-show="expanded" class="expanded-content px-4 pb-4" @click.stop.prevent>
+      <p>{{ locationDescription() }}</p>
+      <div v-if="settlementLocation.hasOwnProperty('owners')">
       <h4>Owners</h4>
         <v-expansion-panels >
-          <v-expansion-panel v-for="(owner, index) in settlement_location.owners" :key="index">
+          <v-expansion-panel v-for="(owner, index) in settlementLocation.owners" :key="index">
             <v-expansion-panel-header><b>{{ owner.full_name }}</b> ({{ ownerRaceStr(owner) }})</v-expansion-panel-header>
             <v-expansion-panel-content>
               <p v-if="typeof ownerDescriptionName(owner) !== 'undefined'">{{ ownerDescriptionName(owner) }}</p>
@@ -24,11 +24,11 @@
 import string_helpers from '../../packs/mixins.js'
 export default {
   props: {
-    settlement_location: {
+    settlementLocation: {
       type: Object,
       require: true
     },
-    location_type: {
+    locationType: {
       type: String,
       require: true
     }
@@ -42,7 +42,7 @@ export default {
     string_helpers
   ],
   methods: {
-    locationTitle: function (location, location_type) {
+    locationTitle: function (location, locationType) {
       if (location.hasOwnProperty('title')) {
         return location.title
       } else if (location.hasOwnProperty('name')) {
@@ -50,7 +50,7 @@ export default {
       } else if (location.hasOwnProperty('size')) {
         return location.size.name
       } else {
-        return location_type
+        return locationType
       }
     },
     locationSubtitle: function (location) {
@@ -69,8 +69,14 @@ export default {
     toggleExpanded: function () {
       this.expanded = !(this.expanded)
     },
-    ownerDescription: function(owner) {
-      return "description here"
+    locationDescription: function() {
+      if (this.settlementLocation.hasOwnProperty('description')) {
+        return this.settlementLocation.description
+      } else if (this.settlementLocation.hasOwnProperty('size') && this.settlementLocation.hasOwnProperty('fervency')) {
+        return `${this.settlementLocation.size.description} ${this.settlementLocation.fervency.description}`
+      } else {
+        return ''
+      }
     },
     ownerDescriptionName: function (owner) {
       let includeDescription = false
@@ -112,7 +118,7 @@ export default {
 
 <style scoped>
 
-.expanded_content {
+.expanded-content {
 
 }
 

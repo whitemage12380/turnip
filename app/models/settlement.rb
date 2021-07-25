@@ -1,3 +1,5 @@
+require 'trading_post'
+require 'village'
 require 'town'
 
 class Settlement
@@ -18,6 +20,10 @@ class Settlement
     FileUtils.mkdir_p(dir)
     settlement_settings = {'save_directory' => dir.to_s}
     @settlement_obj = case type.downcase
+    when 'trading_post'
+      ::Settlements::TradingPost.new(settings: settlement_settings)
+    when 'village'
+      ::Settlements::Village.new(settings: settlement_settings)
     when 'town'
       ::Settlements::Town.new(settings: settlement_settings)
     else

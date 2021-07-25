@@ -1,0 +1,25 @@
+<div id="turnip-sidebar">
+  <h1>Turnip</h1>
+  <div class="sidebar-section">
+    <h2>Actions</h2>
+    <ul>
+      <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+    </ul>
+  </div>
+  <div class="sidebar-section">
+    <h2>Applications</h2>
+    <ul>
+      <%- [
+        ['Settlements', 'settlements']
+      ].each do |application| -%>
+      <li>
+      <%- if current_page?(:controller => application[1], :action => 'index') -%>
+      <span class="selected-sidebar-item"><%= application[0] %></span>
+      <%- else -%>
+      <%= link_to(application[0], application[1], method: :index) %>
+      <%- end -%>
+      </li>
+      <%- end -%>
+    </ul>
+  </div>
+</div>

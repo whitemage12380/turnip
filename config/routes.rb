@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  root to: 'settlements#index'
+  root to: redirect('settlements')
 
   get '/settlements', to: 'settlements#index'
   post '/settlements', to: 'settlements#create'

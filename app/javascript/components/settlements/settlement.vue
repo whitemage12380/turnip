@@ -60,7 +60,7 @@
               <v-container>
                 <v-row>
                   <v-col v-for="(location, index) in locations" :key="index" class="location-col">
-                    <settlement-location :settlement_location="location" :location_type="category"></settlement-location>
+                    <settlement-location :settlementLocation="location" :locationType="category"></settlement-location>
                   </v-col>
                 </v-row>
               </v-container>

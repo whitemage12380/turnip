@@ -2,15 +2,19 @@
   <div id="settlements">
     <v-app>
       <v-app-bar app absolute>
-        <v-app-bar-title class="headline text-uppercase text-no-wrap">
-          Settlements
-        </v-app-bar-title>
+        <v-toolbar-title class="headline text-uppercase text-no-wrap">
+          <span class="app-title">Settlements</span>
+        </v-toolbar-title>
       </v-app-bar>
       <v-main>
         <div class="my-8">
-          <v-btn class="ml-3" @click="newSettlement()">
-            New Settlement
-          </v-btn>
+          <div>
+            <v-btn x-large dark class="ml-3 float-left indigo" @click="newSettlement()">
+              New Settlement
+            </v-btn>
+            <v-select :items="settlementTypes" label="New Settlement Type" v-model="newSettlementType" filled dense class="ml-2 float-left">
+            </v-select>
+          </div>
           <v-container fluid>
             <v-expansion-panels>
               <settlement v-for="settlement in sortedSettlements" :key="settlement.name" :settlement="settlement" v-on:delete-settlement="deleteSettlement"></settlement>
@@ -31,6 +35,12 @@ export default {
   data: function () {
     return {
       settlements: this.initial_settlements,
+      settlementTypes: [
+        "Trading Post",
+        "Village",
+        "Town"
+      ],
+      newSettlementType: "Trading Post",
       sortBy: 'created_at',
       sortDirection: 'desc'
     }
@@ -61,7 +71,7 @@ export default {
     },
     newSettlement: function () {
       let that = this
-      axios.post('/settlements', {}, {'headers': {'Accept': 'application/json'}})
+      axios.post('/settlements', {'type': this.toSnakeCase(this.newSettlementType)}, {'headers': {'Accept': 'application/json'}})
         .then(function(response) {
           console.log("Created new settlement")
           that.refresh()
@@ -70,7 +80,6 @@ export default {
         })
     },
     deleteSettlement: function (settlementName) {
-      console.log("got here!")
       let that = this
       axios.delete(`/settlements/${this.toSnakeCase(settlementName)}.json`, {}, {'headers': {'Accept': 'application/json'}})
         .then(function(response) {
@@ -103,7 +112,7 @@ p {
   font-size: 2em;
   text-align: center;
 }
-.v-app-bar-title__content {
-  text-overflow: clip;
+.app-title {
+  text-overflow: clip !important;
 }
 </style>

@@ -22,9 +22,8 @@ class SettlementsController < ApplicationController
 
   # POST /settlements.json
   def create
-    logger.info "user:"
-    logger.info current_user
-    @new_settlement = Settlement.new(current_user, "town")
+    settlement_type = params.require(:type)
+    @new_settlement = Settlement.new(current_user, settlement_type)
     respond_to do |format|
       if @new_settlement.save
         # format.html
