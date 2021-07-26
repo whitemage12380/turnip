@@ -3,7 +3,7 @@
 var string_helpers = {
 	methods: {
 		toTitleCase(str) {
-			return str.replace(
+			return str.replace(/[_-]+/g, ' ').replace(
 		    /\w\S*/g,
 		    function(txt) {
 		      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

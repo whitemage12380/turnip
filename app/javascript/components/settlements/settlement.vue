@@ -2,43 +2,44 @@
   <v-expansion-panel>
     <v-expansion-panel-header>
       <template v-slot:default="{ open }">
-        <div class="float-left">
-          {{ settlement.name }}
-        </div>
-        <div class="float-right mr-4">
-          <v-fade-transition leave-absolute>
-            <div v-show="open">
-              <v-btn @click.stop="dialogDelete = true" small dark class="settlement-button red"><v-icon>delete</v-icon></v-btn>
-              <v-btn @click="saveAsMd" small class="settlement-button"><v-icon>save</v-icon></v-btn>
-              <v-btn @click.stop="dialogRename = true" small class="settlement-button">Rename</v-btn>
-            </div>
-          </v-fade-transition>
-          <!-- Dialogs associated with settlement buttons -->
-          <v-dialog v-if="open" v-model="dialogDelete" max-width="500">
-            <v-card>
-              <v-row no-gutters class="align-center">
-                <v-col class="pa-2">
-                  Really delete settlement "{{ settlement.name }}?"
-                </v-col>
-                <v-col class="pa-2 flex-grow-0">
-                  <v-btn @click="deleteSettlement">Delete</v-btn>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-dialog>
-          <v-dialog v-if="open" v-model="dialogRename" max-width="500">
-            <v-card>
-              <v-row no-gutters class="align-center">
-                <v-col class="px-2">
-                  <v-text-field label="Settlement Name" v-model="newName"></v-text-field>
-                </v-col>
-                <v-col class="px-2 flex-grow-0">
-                  <v-btn @click="renameSettlement">Rename</v-btn>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-dialog>
-        </div>
+        <v-row class="settlement-header-labels">
+          <v-col class="settlement-name-label">{{ settlement.name }}</v-col>
+          <v-col class="settlement-type-label">{{ toTitleCase(settlement.settlement_type) }}</v-col>
+          <v-col class="settlement-buttons">
+            <v-fade-transition leave-absolute>
+              <div v-show="open">
+                <v-btn @click.stop="dialogDelete = true" small dark class="settlement-button red"><v-icon>delete</v-icon></v-btn>
+                <v-btn @click="saveAsMd" small class="settlement-button"><v-icon>save</v-icon></v-btn>
+                <v-btn @click.stop="dialogRename = true" small class="settlement-button">Rename</v-btn>
+              </div>
+            </v-fade-transition>
+          </v-col>
+        </v-row>
+        <!-- Dialogs associated with settlement buttons -->
+        <v-dialog v-if="open" v-model="dialogDelete" max-width="500">
+          <v-card>
+            <v-row no-gutters class="align-center">
+              <v-col class="pa-2">
+                Really delete settlement "{{ settlement.name }}?"
+              </v-col>
+              <v-col class="pa-2 flex-grow-0">
+                <v-btn @click="deleteSettlement">Delete</v-btn>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-dialog>
+        <v-dialog v-if="open" v-model="dialogRename" max-width="500">
+          <v-card>
+            <v-row no-gutters class="align-center">
+              <v-col class="px-2">
+                <v-text-field label="Settlement Name" v-model="newName"></v-text-field>
+              </v-col>
+              <v-col class="px-2 flex-grow-0">
+                <v-btn @click="renameSettlement">Rename</v-btn>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-dialog>
       </template>
     </v-expansion-panel-header>
     <v-expansion-panel-content>
@@ -172,5 +173,18 @@ export default {
 .settlement-button {
   float: right;
   margin:  0 4px;
+}
+.settlement-header-labels {
+  justify-content:  space-between;
+}
+.settlement-name-label {
+  flex-grow:  2;
+}
+.settlement-type-label {
+  flex-grow: 1;
+  color:  gray;
+}
+.settlement-buttons {
+  margin-right:  1rem;
 }
 </style>
