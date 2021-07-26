@@ -117,4 +117,11 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  # Set for devise (have not confirmed it is fully correct and appropriate)
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Custom: Base directory for user content files (e.g. settlement files)
+  #         From this directory, new directories are created named after users
+  config.x.turnip.base_content_directory = Rails.root.join('data')
 end
