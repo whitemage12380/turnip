@@ -79,3 +79,5 @@ yarn-debug.log*
 # Custom
 /data
 /config/credentials.yml.enc
+*.swp
+*.swo
