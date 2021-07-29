@@ -25,3 +25,6 @@ test:
 production:
   <<: *default
   database: turnip
+  port: <%= ENV.fetch('PGPORT', 5432) %>
+  username: <%= Rails.application.credentials.dig(:production, :postgres_username) %>
+  password: <%= Rails.application.credentials.dig(:production, :postgres_password) %>
