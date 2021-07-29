@@ -1,0 +1,30 @@
+Turnip Install procedure on Fenrir:
+
+sudo mkdir /usr/local/turnip
+sudo useradd -d /usr/local/turnip turnip
+sudo chown turnip /usr/local/turnip
+sudo cp -a 
+sudo cp -a /home/whitemage/.bash_profile /usr/local/turnip/
+sudo chown turnip /usr/local/turnip/.bash_profile # Also modified .bashrc to source .bash_profile
+sudo su - turnip
+git clone https://github.com/whitemage12380/turnip.git
+# Followed RVM website instructions to install rvm and ruby
+cd turnip
+bundle install
+# Saw there were 4 different postgres instances running, stopped all but the 12 instance on port 5432
+# Also added a new turnip database and turnip login role as the owner
+sudo apt install pwgen
+# Generated password for turnip's database connection
+export EDITOR="vim -f"
+rails credentials:edit # Save the file; I haven't added postgres creds yet but here is where I'd do it
+rails db:migrate RAILS_ENV=production
+sudo apt install npm
+sudo npm install --global yarn
+# The below npm lines may or may not have been a good idea
+sudo npm cache clean -f
+sudo n stable
+yarn install --frozen-lockfile
+RAILS_ENV="production" bundle exec rails webpacker:install # May not have been a good idea
+# Tried to use foreman next but it looks like in production doesn't have a live webpacker server, supposed to precompile I think
+bin/webpack # This seemed to work but maybe didn't create the expected javascript files, at least not permanently and/or in the right place?
+rails s -e production # This got the site up, but the javascript files could not be found

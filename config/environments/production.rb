@@ -22,7 +22,9 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  # We are not using Apache or NGINX for our basic server (for now), so enable file server
+  config.public.file_server.enabled = true
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -124,4 +126,8 @@ Rails.application.configure do
   # Custom: Base directory for user content files (e.g. settlement files)
   #         From this directory, new directories are created named after users
   config.x.turnip.base_content_directory = Rails.root.join('data')
+
+  # Don't serve static assets
+  config.serve_static_assets = false
+
 end
