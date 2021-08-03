@@ -10,10 +10,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_10_054824) do
+ActiveRecord::Schema.define(version: 2021_07_31_055651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "characters", force: :cascade do |t|
+    t.bigint "world_id"
+    t.bigint "user_id", null: false
+    t.text "first_name", null: false
+    t.text "last_name"
+    t.text "title"
+    t.text "description"
+    t.text "filename"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_characters_on_user_id"
+    t.index ["world_id"], name: "index_characters_on_world_id"
+  end
+
+  create_table "relationship_types", force: :cascade do |t|
+    t.text "name", null: false
+    t.text "description"
+    t.text "color"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.bigint "character_id", null: false
+    t.bigint "relationship_with_id", null: false
+    t.bigint "relationship_type_id"
+    t.bigint "world_id"
+    t.bigint "user_id", null: false
+    t.text "color"
+    t.text "name"
+    t.text "description"
+    t.bigint "relationship_type_forward_id"
+    t.text "name_forward"
+    t.text "description_forward"
+    t.bigint "relationship_type_backward_id"
+    t.text "name_backward"
+    t.text "description_backward"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index "(GREATEST(character_id, relationship_with_id)), (LEAST(character_id, relationship_with_id))", name: "index_relationships_unique", unique: true
+    t.index ["character_id"], name: "index_relationships_on_character_id"
+    t.index ["relationship_type_backward_id"], name: "index_relationships_on_relationship_type_backward_id"
+    t.index ["relationship_type_forward_id"], name: "index_relationships_on_relationship_type_forward_id"
+    t.index ["relationship_type_id"], name: "index_relationships_on_relationship_type_id"
+    t.index ["relationship_with_id"], name: "index_relationships_on_relationship_with_id"
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+    t.index ["world_id"], name: "index_relationships_on_world_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.text "username", default: "", null: false
@@ -30,4 +79,23 @@ ActiveRecord::Schema.define(version: 2021_07_10_054824) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  create_table "worlds", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "name", null: false
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_worlds_on_user_id"
+  end
+
+  add_foreign_key "characters", "users"
+  add_foreign_key "characters", "worlds"
+  add_foreign_key "relationships", "characters"
+  add_foreign_key "relationships", "characters", column: "relationship_with_id"
+  add_foreign_key "relationships", "relationship_types"
+  add_foreign_key "relationships", "relationship_types", column: "relationship_type_backward_id"
+  add_foreign_key "relationships", "relationship_types", column: "relationship_type_forward_id"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "worlds"
+  add_foreign_key "worlds", "users"
 end

@@ -16,7 +16,7 @@
       <%- if current_page?(:controller => application[1], :action => 'index') -%>
       <span class="selected-sidebar-item"><%= application[0] %></span>
       <%- else -%>
-      <%= link_to(application[0], application[1], method: :index) %>
+      <%= link_to(application[0], application[1]) %>
       <%- end -%>
       </li>
       <%- end -%>
