@@ -66,9 +66,6 @@ export default {
     numSettlements: function () {
       return this.settlements.length
     },
-    sortSettlements: function () {
-      this.settlements.sort((a, b) => {a.name - b.name})
-    },
     newSettlement: function () {
       let that = this
       axios.post('/settlements', {'type': this.toSnakeCase(this.newSettlementType)}, {'headers': {'Accept': 'application/json'}})
