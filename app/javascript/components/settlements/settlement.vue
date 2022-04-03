@@ -80,7 +80,7 @@
               <v-card-title>{{ hardship.name }}</v-card-title>
               <v-card-subtitle>{{ hardship.description }}</v-card-subtitle>
               <div>
-                <b>Outcome: {{ hardship.outcome.name }}.</b> {{ hardship.outcome.description }}
+                <p class="px-4 pb-4"><b>Outcome: {{ hardship.outcome.name }}.</b> {{ hardship.outcome.description }}</p>
               </div>
             </v-card>
           </div>
