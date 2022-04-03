@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/whitemage12380/character_generator_5e
+  revision: def62646baca6da751dd3a5e6074b4e4104b8901
+  tag: 0.2.0
+  specs:
+    character_generator_5e (0.2.0)
+
+GIT
   remote: https://github.com/whitemage12380/settlement_generator
   revision: 694d52ab8cf467dce99ad76215118652ddb0122c
   tag: 0.9.1
@@ -226,6 +233,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  character_generator_5e!
   devise
   fileutils
   jbuilder (~> 2.7)

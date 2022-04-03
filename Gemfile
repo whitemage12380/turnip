@@ -63,3 +63,5 @@ gem 'devise'
 gem 'fileutils'
 # Settlements gem from github
 gem 'settlement_generator', git: 'https://github.com/whitemage12380/settlement_generator', tag: '0.9.1'
+# Character generator gem from github
+gem 'character_generator_5e', git: 'https://github.com/whitemage12380/character_generator_5e', tag: '0.2.0'
