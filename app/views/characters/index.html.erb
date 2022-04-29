@@ -1,0 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_pack_tag 'characters', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<div>
+  <characters :initial_characters="<%= @characters.to_json %>"></characters>
+</div>

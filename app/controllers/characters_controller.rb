@@ -4,7 +4,7 @@ class CharactersController < ApplicationController
   # GET /characters
   # GET /characters.json
   def index
-    @characters = Character.all
+    @characters = Character.all_for_user(current_user)
     respond_to do |format|
       format.html
       format.json { render :json => @characters }
@@ -31,5 +31,14 @@ class CharactersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_character
       @character = Character.find(params[:id])
+    end
+
+    def character_params
+      p = params.require(:character).permit(:name, :first_name, :last_name)
+      if p['first_name'].nil? and p['last_name'].nil? and not p['name'].nil?
+        p['first_name'] = p['name'].split(" ").first
+        p['last_name'] = p['name'].split(" ").drop(1).join(" ")
+      end
+      p
     end
 end
