@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.4'
+ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 7.0.2'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -39,7 +39,7 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', '~> 3.0'
 end
 
 group :test do
@@ -62,6 +62,6 @@ gem 'devise'
 # Use FileUtils to handle file-based user content
 gem 'fileutils'
 # Settlements gem from github
-gem 'settlement_generator', git: 'https://github.com/whitemage12380/settlement_generator', tag: '0.9.1'
+gem 'settlement_generator', git: 'https://github.com/whitemage12380/settlement_generator', tag: '0.10.0'
 # Character generator gem from github
 gem 'character_generator_5e', git: 'https://github.com/whitemage12380/character_generator_5e', tag: '0.2.0'
